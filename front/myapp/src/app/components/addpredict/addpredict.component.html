@@ -1,0 +1,17 @@
+<input type="number" #age placeholder="Age">
+<input type="string" #genre placeholder="genre">
+
+<!-- Dropdown for Gender -->
+<mat-form-field appearance="fill">
+  <mat-label>Gender</mat-label>
+  <mat-select #gender>
+    <mat-option value="male">Male</mat-option>
+    <mat-option value="female">Female</mat-option>
+  </mat-select>
+</mat-form-field>
+
+<!-- Button to trigger the prediction -->
+<button mat-button (click)="addst(age.value, gender.value,genre.value)">Get Prediction</button>
+
+<!-- Display the result -->
+<p>{{ predictionResult }}</p>
