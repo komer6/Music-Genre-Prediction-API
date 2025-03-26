@@ -4,26 +4,43 @@ from sklearn.metrics import accuracy_score
 import pandas as pd
 import joblib
 
+import sqlite3
+import pandas as pd
+import joblib
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.model_selection import train_test_split
+
+DB_PATH = "music.db"  # Path to your SQLite database
+
 def predict_genre(age, gender):
-    # Load the dataset
-    music_dt = pd.read_csv('music.csv')
-    
+    """Train a model using data from SQLite and predict genre based on age and gender."""
+    # Connect to SQLite and fetch data
+    conn = sqlite3.connect(DB_PATH)
+    query = "SELECT age, gender, genre FROM music_data"  # Assuming the table is named 'music_data'
+    music_dt = pd.read_sql(query, conn)
+    conn.close()
+
+    if music_dt.empty:
+        return "No data available for training"
+
     # Prepare the data
-    X = music_dt.drop(columns=['genre'])  # features (age, gender)
-    Y = music_dt['genre']  # target (genre)
-    
-    # Split the data into train and test sets
+    X = music_dt.drop(columns=['genre'])  # Features (age, gender)
+    Y = music_dt['genre']  # Target (genre)
+
+    # Split the data
     X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2)
-    
-    # Initialize the decision tree model
+
+    # Train the model
     model = DecisionTreeClassifier()
-    model.fit(X_train, Y_train)  # Train the model
-    
-    # Predict the genre based on input age and gender
-    prediction = model.predict([[age, gender]])
+    model.fit(X_train, Y_train)
+
+    # Save the trained model
     joblib.dump(model, 'our_pridction.joblib')
-    
+
+    # Predict the genre
+    prediction = model.predict([[age, gender]])
     return prediction[0]
+
 
 def predict_alredy_exisit(age, gender):
     model=joblib.load( 'our_pridction.joblib')
