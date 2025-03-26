@@ -1,0 +1,40 @@
+/* styles.css (or your component's specific CSS file) */
+
+/* Button Styles */
+.btn {
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    text-decoration: none;
+    display: inline-block;
+    margin: 10px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .btn-success {
+    background-color: #28a745;
+    color: white;
+  }
+  
+  .btn-danger {
+    background-color: #dc3545;
+    color: white;
+  }
+  
+  /* Button Hover Effect */
+  .btn:hover {
+    opacity: 0.8;
+  }
+  
+  /* Container Styles */
+  .container {
+    margin-top: 20px;
+    text-align: center;
+  }
+  
+  /* Optional: Customize the Router Outlet Section */
+  router-outlet {
+    display: block;
+    margin-top: 30px;
+  }
+  

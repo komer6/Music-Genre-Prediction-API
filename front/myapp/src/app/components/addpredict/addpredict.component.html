@@ -1,3 +1,4 @@
+<div class="form-container">
 <input type="number" #age placeholder="Age">
 <input type="string" #genre placeholder="genre">
 
@@ -11,7 +12,8 @@
 </mat-form-field>
 
 <!-- Button to trigger the prediction -->
-<button mat-button (click)="addst(age.value, gender.value,genre.value)">Get Prediction</button>
+<button mat-button (click)="addst(age.value, gender.value,genre.value)">add your favorite gnere to our data</button>
 
 <!-- Display the result -->
 <p>{{ predictionResult }}</p>
+</div>

@@ -3,7 +3,6 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
 import pandas as pd
 import joblib
-
 import sqlite3
 import pandas as pd
 import joblib

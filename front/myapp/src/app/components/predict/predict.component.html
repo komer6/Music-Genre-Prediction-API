@@ -1,16 +1,18 @@
-<input type="number" #age placeholder="Age">
+<div class="form-container">
+  <input type="number" #age placeholder="Age">
 
-<!-- Dropdown for Gender -->
-<mat-form-field appearance="fill">
-  <mat-label>Gender</mat-label>
-  <mat-select #gender>
-    <mat-option value="male">Male</mat-option>
-    <mat-option value="female">Female</mat-option>
-  </mat-select>
-</mat-form-field>
+  <!-- Dropdown for Gender -->
+  <mat-form-field appearance="fill">
+    <mat-label>Gender</mat-label>
+    <mat-select #gender>
+      <mat-option value="male">Male</mat-option>
+      <mat-option value="female">Female</mat-option>
+    </mat-select>
+  </mat-form-field>
 
-<!-- Button to trigger the prediction -->
-<button mat-button (click)="getPrediction(age.value, gender.value)">Get Prediction</button>
+  <!-- Button to trigger the prediction -->
+  <button mat-button (click)="getPrediction(age.value, gender.value)">Get Prediction</button>
 
-<!-- Display the result -->
-<p>{{ predictionResult }}</p>
+  <!-- Display the result -->
+  <p>{{ predictionResult }}</p>
+</div>
