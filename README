@@ -1,0 +1,137 @@
+Music Genre Prediction API
+This project is a simple FastAPI application that predicts a music genre based on user input (age and gender) using a decision tree classifier from scikit-learn. It also provides an endpoint to append new data to a CSV file (music.csv) and update the model.
+
+Features
+Predict Genre:
+Use the /convert endpoint to predict a music genre from a given age and gender.
+
+Append Data:
+Use the /save_to_csv endpoint to add a new record (age, gender, and genre) to the music.csv dataset and update the model.
+
+Model Persistence:
+The model is saved to disk using joblib so that predictions can use an existing model if available.
+
+Project Structure
+graphql
+Copy
+Edit
+.
+├── ai.py         # Contains functions for training/predicting the model.
+├── app.py        # FastAPI application with endpoints.
+├── music.csv     # CSV file with the dataset (created/updated by the app).
+├── requirements.txt  # Python dependencies.
+└── README.md     # This file.
+Endpoints
+1. /convert (POST)
+Description:
+Predicts the music genre based on the provided age and gender.
+
+Input JSON:
+
+json
+Copy
+Edit
+{
+  "age": 25,
+  "gender": "male"
+}
+Response Example:
+
+arduino
+Copy
+Edit
+"Predicted genre using AI: HipHop"
+2. /save_to_csv (POST)
+Description:
+Appends a new record (age, gender, and genre) to music.csv and updates the model.
+
+Input JSON:
+
+json
+Copy
+Edit
+{
+  "age": 25,
+  "gender": "male",
+  "genre": "HipHop"
+}
+Response Example:
+
+json
+Copy
+Edit
+{
+  "message": "Data saved: Age: 25, Gender: male, Genre: HipHop"
+}
+Installation
+Clone the repository:
+
+bash
+Copy
+Edit
+git clone https://github.com/yourusername/music-genre-api.git
+cd music-genre-api
+Create and activate a virtual environment:
+
+On macOS/Linux:
+
+bash
+Copy
+Edit
+python3 -m venv venv
+source venv/bin/activate
+On Windows:
+
+bash
+Copy
+Edit
+python -m venv venv
+venv\Scripts\activate
+Install the dependencies:
+
+bash
+Copy
+Edit
+pip install -r requirements.txt
+(Ensure your requirements.txt includes FastAPI, uvicorn, scikit-learn, pandas, and joblib.)
+
+Running the Application
+To run the FastAPI application, execute the following command:
+
+bash
+Copy
+Edit
+uvicorn app:app --reload
+The API will be available at: http://127.0.0.1:8000
+
+Testing the Endpoints
+You can test the endpoints using Thunder Client, Postman, or your browser:
+
+/convert Endpoint:
+Send a POST request with the JSON body:
+
+json
+Copy
+Edit
+{
+  "age": 25,
+  "gender": "male"
+}
+/save_to_csv Endpoint:
+Send a POST request with the JSON body:
+
+json
+Copy
+Edit
+{
+  "age": 25,
+  "gender": "male",
+  "genre": "HipHop"
+}
+Updating the Model
+When data is appended via the /save_to_csv endpoint, the code calls the predict_genre function with dummy values (age=0, gender=0) to update and save the model automatically. The model file (our_pridction.joblib) is then used for subsequent predictions.
+
+Notes
+Make sure that music.csv is in the same folder as app.py and ai.py or that the file paths are correctly set.
+
+The gender conversion is handled within the endpoints, converting "male" to 1 and "female" to 0.
